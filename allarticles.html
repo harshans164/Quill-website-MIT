@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Articles - MIT Quill</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    .page-header {
+      padding: 3rem 1rem 2rem;
+      text-align: center;
+      background-color: #fff;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-radius: 12px;
+    }
+
+    .search-bar {
+      max-width: 400px;
+      margin: 1rem auto 2rem;
+    }
+
+    .article-card {
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-color: #fff;
+      border: 0;
+      max-width: 400px;
+    }
+    .article-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .badge-category {
+      color: #FFD700; /* Gold text */
+      background-color: #fff8dc; /* Light gold background */
+    }
+
+    .article-text {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .author-date {
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-read {
+      font-size: 0.85rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .btn-read:hover {
+      background-color: #fff8dc;
+      border-color: #FFD700;
+      color: black;
+    }
+    .back-home-btn {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.back-home-btn:hover {
+  background-color: #fff8dc; /* light gold */
+  border-color: #FFD700;
+  color: #000;
+  text-decoration: none;
+}
+  </style>
+</head>
+<body>
+<!-- Back to Home -->
+<div class="container my-4">
+  <a href="index.html" class="btn btn-outline-secondary back-home-btn">
+    &larr; Back to Home
+  </a>
+</div>
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>All Articles</h1>
+    <p>Explore our complete collection of literary analyses, creative pieces, and thought-provoking essays.</p>
+    <input type="text" class="form-control search-bar" placeholder="Search articles...">
+  </div>
+
+  <!-- Articles Grid -->
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+
+      <!-- Article Card Example -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card article-card shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="badge badge-category fw-bold">Poetry Analysis</span>
+              <span class="badge bg-light text-secondary">5 min read</span>
+            </div>
+            <h5 class="card-title mt-1">The Renaissance of Modern Poetry</h5>
+            <p class="card-text article-text">Exploring how contemporary poets are redefining traditional forms and finding new voices in a digital age...</p>
+            <p class="author-date">Sarah Chen • March 15, 2024</p>
+            <a href="https://drive.google.com/file/d/FILE_ID/view" target="_blank" class="btn btn-sm btn-outline-secondary btn-read align-self-start">Read Full Article</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card article-card shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="badge badge-category fw-bold">Literary Criticism</span>
+              <span class="badge bg-light text-secondary">7 min read</span>
+            </div>
+            <h5 class="card-title mt-1">Narrative Techniques in Science Fiction</h5>
+            <p class="card-text article-text">A deep dive into the innovative storytelling methods that make science fiction literature both compelling and thought-provoking...</p>
+            <p class="author-date">Alex Kumar • March 12, 2024</p>
+            <a href="https://drive.google.com/file/d/FILE_ID/view" target="_blank" class="btn btn-sm btn-outline-secondary btn-read align-self-start">Read Full Article</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card article-card shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="badge badge-category fw-bold">Creative Writing</span>
+              <span class="badge bg-light text-secondary">4 min read</span>
+            </div>
+            <h5 class="card-title mt-1">Finding Your Voice: A Writer's Journey</h5>
+            <p class="card-text article-text">Personal reflections on the evolution of writing style and the importance of authenticity in creative expression...</p>
+            <p class="author-date">Maya Rodriguez • March 10, 2024</p>
+            <a href="https://drive.google.com/file/d/FILE_ID/view" target="_blank" class="btn btn-sm btn-outline-secondary btn-read align-self-start">Read Full Article</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Repeat similar divs for all 9 articles -->
+
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
