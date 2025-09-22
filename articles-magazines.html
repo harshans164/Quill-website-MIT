@@ -99,164 +99,11 @@
     <section id="blog-posts" class="blog-posts section">
 
       <div class="container">
-        <div class="row gy-4">
-
-          <div class="col-lg-4">
-            <article>
-
-              <div class="post-img">
-                <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Politics</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Maria Doe</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jan 1, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-lg-4">
-            <article>
-
-              <div class="post-img">
-                <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Sports</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-2.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Allisa Mayer</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jun 5, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-lg-4">
-            <article>
-
-              <div class="post-img">
-                <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Entertainment</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-3.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Mark Dower</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jun 22, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-lg-4">
-            <article>
-
-              <div class="post-img">
-                <img src="assets/img/blog/blog-4.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Sports</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Non rem rerum nam cum quo minus olor distincti</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-4.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Lisa Neymar</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jun 30, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-lg-4">
-            <article>
-
-              <div class="post-img">
-                <img src="assets/img/blog/blog-5.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Politics</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Accusamus quaerat aliquam qui debitis facilis consequatur</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-5.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Denis Peterson</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jan 30, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-lg-4">
-            <article>
-
-              <div class="post-img">
-                <img src="assets/img/blog/blog-6.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Entertainment</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Distinctio provident quibusdam numquam aperiam aut</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-6.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Mika Lendon</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Feb 14, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
+        <div class="row gy-4" id="latestMagazineRow">
+          <!-- Latest magazine card will be injected here from Google Sheets -->
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+          <a href="allmagazine.html" class="btn btn-outline-secondary">View All Magazines</a>
         </div>
       </div>
 
@@ -365,6 +212,74 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+    (function() {
+      const SHEET_ID = '16b2aV3G4dimm7ENkD6KlJklPt2bXrc9LL7lt682Jv2c';
+      const SHEET_NAME = 'Sheet1';
+      const GVIZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+      function parseGviz(jsonpText) {
+        const start = jsonpText.indexOf('(') + 1;
+        const end = jsonpText.lastIndexOf(')');
+        const json = JSON.parse(jsonpText.substring(start, end));
+        return (json.table.rows || [])
+          .filter(r => r && r.c)
+          .map(r => r.c.map(c => (c && (c.f || c.v)) ? (c.f || c.v) : ''));
+      }
+
+      function formatDate(value) {
+        try {
+          const d = new Date(value);
+          if (!isNaN(d)) {
+            return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+          }
+          return value;
+        } catch (e) {
+          return value || '';
+        }
+      }
+
+      function createLatestCard(item) {
+        // Column mapping: 0=Heading, 1=Description, 3=Author, 4=Date
+        const title = item[0] || '';
+        const description = item[1] || '';
+        const author = item[3] || '';
+        const date = item[4] || '';
+
+        const col = document.createElement('div');
+        col.className = 'col-lg-4';
+        col.innerHTML = `
+          <article>
+            <div class="post-img">
+              <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+            </div>
+            <p class="post-category">magazine</p>
+            <h2 class="title"><a href="allmagazine.html">${title}</a></h2>
+            <div class="d-flex align-items-center">
+              <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+              <div class="post-meta">
+                <p class="post-author">${author || 'MIT Quill Team'}</p>
+                <p class="post-date"><time>${formatDate(date)}</time></p>
+              </div>
+            </div>
+          </article>`;
+        return col;
+      }
+
+      fetch(GVIZ_URL)
+        .then(r => r.text())
+        .then(text => parseGviz(text))
+        .then(rows => {
+          const data = rows.filter(r => (r[0] || '').toString().trim().length > 0 && r[0] !== 'Heading');
+          if (!data.length) return;
+          const latest = data[data.length - 1]; // bottom-most row
+          const container = document.getElementById('latestMagazineRow');
+          container.innerHTML = '';
+          container.appendChild(createLatestCard(latest));
+        })
+        .catch(err => console.error('Failed to load latest magazine from Google Sheets', err));
+    })();
+  </script>
 
 </body>
 

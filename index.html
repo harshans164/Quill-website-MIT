@@ -715,6 +715,82 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+  // Populate the Magazines tab with a single card from Google Sheets (bottom-most row)
+  (function() {
+    const SHEET_ID = '16b2aV3G4dimm7ENkD6KlJklPt2bXrc9LL7lt682Jv2c';
+    const SHEET_NAME = 'Sheet1';
+    const GVIZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+    function parseGviz(jsonpText) {
+      const start = jsonpText.indexOf('(') + 1;
+      const end = jsonpText.lastIndexOf(')');
+      const json = JSON.parse(jsonpText.substring(start, end));
+      return (json.table.rows || [])
+        .filter(r => r && r.c)
+        .map(r => r.c.map(c => (c && (c.f || c.v)) ? (c.f || c.v) : ''));
+    }
+
+    function formatDate(value) {
+      try {
+        const d = new Date(value);
+        if (!isNaN(d)) {
+          return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+        return value;
+      } catch (_) {
+        return value || '';
+      }
+    }
+
+    function createMagazineCard(item) {
+      // Columns: 0=Heading, 1=Description, 3=Author, 4=Date
+      const title = item[0] || '';
+      const description = item[1] || '';
+      const author = item[3] || 'MIT Quill Team';
+      const date = formatDate(item[4] || '');
+      return `
+        <div class="col-md-6 col-lg-4">
+          <div class="card article-card shadow-sm border-0">
+            <div class="card-body py-3 px-3 d-flex flex-column">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="badge category-gold fw-bold">magazine</span>
+                <span class="badge bg-light text-secondary">5 min read</span>
+              </div>
+              <h5 class="card-title mt-1">${title}</h5>
+              <p class="card-text">${description}</p>
+              <p class="text-muted mb-2">${author}${author && date ? ' • ' : ''}${date}</p>
+              <a href="#" id="latestMagLink" class="btn btn-sm btn-outline-secondary align-self-start">Read More</a>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderLatest() {
+      fetch(GVIZ_URL)
+        .then(r => r.text())
+        .then(text => parseGviz(text))
+        .then(rows => {
+          const data = rows.filter(r => (r[0] || '').toString().trim().length > 0 && r[0] !== 'Heading');
+          if (!data.length) return;
+          const latestIndex = data.length - 1;
+          const latest = data[latestIndex];
+          const container = document.getElementById('magazines-row');
+          if (!container) return;
+          container.innerHTML = createMagazineCard(latest);
+          const link = document.getElementById('latestMagLink');
+          if (link) link.href = `magazine.html?id=${encodeURIComponent(latestIndex)}`;
+        })
+        .catch(err => console.error('Failed to load magazine card for homepage', err));
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderLatest);
+    } else {
+      renderLatest();
+    }
+  })();
+  </script>
 
 </body>
 

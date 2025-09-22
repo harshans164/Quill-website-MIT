@@ -90,60 +90,78 @@
       <a href="index.html" class="back-btn"><i class="bi bi-house-door"></i> Back to Home</a>
     </div>
 
-    <div class="row g-4">
-      <!-- Magazine 1 -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card magazine-card shadow-sm p-3">
-          <div class="d-flex justify-content-between mb-2">
-            <span class="badge badge-gold fw-bold">Creative Writing</span>
-            <span class="badge bg-light text-secondary">6 min read</span>
-          </div>
-          <h5 class="card-title mt-1">MIT Literary Monthly</h5>
-          <p class="card-text">
-            Latest edition of our campus magazine featuring creative writing, essays, and interviews with upcoming authors...
-          </p>
-          <p class="author-date">MIT Quill Team • March 10, 2024</p>
-          <a href="https://drive.google.com/your-magazine-link-1" target="_blank" class="read-btn">Read Full Magazine</a>
-        </div>
-      </div>
-
-      <!-- Magazine 2 -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card magazine-card shadow-sm p-3">
-          <div class="d-flex justify-content-between mb-2">
-            <span class="badge badge-gold fw-bold">Creative Writing</span>
-            <span class="badge bg-light text-secondary">5 min read</span>
-          </div>
-          <h5 class="card-title mt-1">Spring Edition 2024</h5>
-          <p class="card-text">
-            Featuring poetry, short stories, and literary critiques from the talented MIT Quill members.
-          </p>
-          <p class="author-date">MIT Quill Team • March 20, 2024</p>
-          <a href="https://drive.google.com/your-magazine-link-2" target="_blank" class="read-btn">Read Full Magazine</a>
-        </div>
-      </div>
-
-      <!-- Magazine 3 -->
-      <div class="col-md-6 col-lg-4">
-        <div class="card magazine-card shadow-sm p-3">
-          <div class="d-flex justify-content-between mb-2">
-            <span class="badge badge-gold fw-bold">Creative Writing</span>
-            <span class="badge bg-light text-secondary">7 min read</span>
-          </div>
-          <h5 class="card-title mt-1">Winter Highlights</h5>
-          <p class="card-text">
-            A collection of the finest essays, poetry, and stories from the winter semester's literary efforts.
-          </p>
-          <p class="author-date">MIT Quill Team • December 18, 2023</p>
-          <a href="https://drive.google.com/your-magazine-link-3" target="_blank" class="read-btn">Read Full Magazine</a>
-        </div>
-      </div>
-
-      <!-- Add more magazines similarly -->
-    </div>
+    <div class="row g-4" id="magazinesRow"></div>
   </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (function() {
+      const SHEET_ID = '16b2aV3G4dimm7ENkD6KlJklPt2bXrc9LL7lt682Jv2c';
+      const SHEET_NAME = 'Sheet1';
+      const GVIZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+      function parseGviz(jsonpText) {
+        const start = jsonpText.indexOf('(') + 1;
+        const end = jsonpText.lastIndexOf(')');
+        const json = JSON.parse(jsonpText.substring(start, end));
+        // Return rows as plain arrays by index (A=0, B=1, ...)
+        return (json.table.rows || [])
+          .filter(r => r && r.c)
+          .map(r => r.c.map(c => (c && (c.f || c.v)) ? (c.f || c.v) : ''));
+      }
+
+      function formatDate(value) {
+        try {
+          const d = new Date(value);
+          if (!isNaN(d)) {
+            return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+          }
+          return value;
+        } catch (e) {
+          return value || '';
+        }
+      }
+
+      function createCard(item, id) {
+        // Column mapping: 0=Heading, 1=Description, 3=Author, 4=Date
+        const title = item[0] || '';
+        const description = item[1] || '';
+        const author = item[3] || '';
+        const date = item[4] || '';
+        const readTime = '';
+
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-4';
+
+        col.innerHTML = `
+          <div class="card magazine-card shadow-sm p-3">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="badge badge-gold fw-bold">Creative Writing</span>
+              <span class="badge bg-light text-secondary">${readTime || ''}</span>
+            </div>
+            <h5 class="card-title mt-1">${title}</h5>
+            <p class="card-text">${description}</p>
+            <p class="author-date">${author}${author && date ? ' • ' : ''}${formatDate(date)}</p>
+            <a href="magazine.html?id=${encodeURIComponent(id)}" class="read-btn">Read Full Magazine</a>
+          </div>`;
+        return col;
+      }
+
+      fetch(GVIZ_URL)
+        .then(r => r.text())
+        .then(text => parseGviz(text))
+        .then(rows => {
+          // Filter out empty rows and possible header row
+          const data = rows.filter(r => (r[0] || '').toString().trim().length > 0 && r[0] !== 'Heading');
+          const container = document.getElementById('magazinesRow');
+          container.innerHTML = '';
+          data.forEach((item, idx) => container.appendChild(createCard(item, idx)));
+        })
+        .catch(err => {
+          console.error('Failed to load magazines from Google Sheets', err);
+        });
+    })();
+  </script>
 </body>
 </html>
