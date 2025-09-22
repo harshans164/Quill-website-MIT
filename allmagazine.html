@@ -38,15 +38,18 @@
       color: #000;
     }
 
+    /* Magazine: glossy cover look */
     .magazine-card {
-      border-radius: 12px;
+      border-radius: 16px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      max-width: 400px;
+      max-width: 520px;
       margin: auto;
+      background: linear-gradient(180deg, #ffffff 0%, #fffdf2 100%);
+      border: 1px solid #f1e7b6;
     }
     .magazine-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      box-shadow: 0 12px 28px rgba(255, 215, 0, 0.18);
     }
 
     .badge-gold {
@@ -78,6 +81,7 @@
       background-color: #fff8dc;
       border-color: #FFD700;
     }
+    mark { background-color: #fff3cd; padding: 0 2px; }
   </style>
 </head>
 
@@ -90,7 +94,14 @@
       <a href="index.html" class="back-btn"><i class="bi bi-house-door"></i> Back to Home</a>
     </div>
 
+    <div class="row mb-3">
+      <div class="col-12 col-md-8 mx-auto">
+        <input id="magSearch" type="text" class="form-control" placeholder="Search magazines...">
+      </div>
+    </div>
+
     <div class="row g-4" id="magazinesRow"></div>
+    <div class="text-center text-muted my-4" id="magazinesEmpty" style="display:none;">No results</div>
   </div>
 
   <!-- Bootstrap JS -->
@@ -137,7 +148,7 @@
         col.innerHTML = `
           <div class="card magazine-card shadow-sm p-3">
             <div class="d-flex justify-content-between mb-2">
-              <span class="badge badge-gold fw-bold">Creative Writing</span>
+              <span class="badge badge-gold fw-bold"><i class="bi bi-journal-richtext"></i> Magazine</span>
               <span class="badge bg-light text-secondary">${readTime || ''}</span>
             </div>
             <h5 class="card-title mt-1">${title}</h5>
@@ -148,15 +159,72 @@
         return col;
       }
 
+      let allData = [];
+
+      function escapeHtml(str) {
+        return String(str).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[ch]));
+      }
+
+      function highlight(text, query) {
+        if (!query) return escapeHtml(text);
+        const safe = escapeHtml(text);
+        const pattern = new RegExp(`(${query.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')})`, 'ig');
+        return safe.replace(pattern, '<mark>$1</mark>');
+      }
+
+      function renderList(list, query) {
+        const container = document.getElementById('magazinesRow');
+        const empty = document.getElementById('magazinesEmpty');
+        container.innerHTML = '';
+        if (!list.length) { empty.style.display = ''; return; }
+        empty.style.display = 'none';
+        list.forEach((item, idx) => {
+          const title = item[0] || '';
+          const description = item[1] || '';
+          const author = item[3] || '';
+          const date = item[4] || '';
+
+          const col = document.createElement('div');
+          col.className = 'col-md-6 col-lg-4';
+          col.innerHTML = `
+            <div class="card magazine-card shadow-sm p-3">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="badge badge-gold fw-bold">Creative Writing</span>
+                <span class="badge bg-light text-secondary"></span>
+              </div>
+              <h5 class="card-title mt-1">${highlight(title, query)}</h5>
+              <p class="card-text">${highlight(description, query)}</p>
+              <p class="author-date">${highlight(author, query)}${author && date ? ' • ' : ''}${formatDate(date)}</p>
+              <a href="magazine.html?id=${encodeURIComponent(idx)}" class="read-btn">Read Full Magazine</a>
+            </div>`;
+          container.appendChild(col);
+        });
+      }
+
+      function attachSearch() {
+        const input = document.getElementById('magSearch');
+        if (!input) return;
+        input.addEventListener('input', () => {
+          const q = input.value.toLowerCase().trim();
+          if (!q) { renderList(allData, ''); return; }
+          const filtered = allData.filter(r => {
+            const title = (r[0] || '').toString().toLowerCase();
+            const desc = (r[1] || '').toString().toLowerCase();
+            const author = (r[3] || '').toString().toLowerCase();
+            return title.includes(q) || desc.includes(q) || author.includes(q);
+          });
+          renderList(filtered, q);
+        });
+      }
+
       fetch(GVIZ_URL)
         .then(r => r.text())
         .then(text => parseGviz(text))
         .then(rows => {
           // Filter out empty rows and possible header row
-          const data = rows.filter(r => (r[0] || '').toString().trim().length > 0 && r[0] !== 'Heading');
-          const container = document.getElementById('magazinesRow');
-          container.innerHTML = '';
-          data.forEach((item, idx) => container.appendChild(createCard(item, idx)));
+          allData = rows.filter(r => (r[0] || '').toString().trim().length > 0 && r[0] !== 'Heading');
+          renderList(allData, '');
+          attachSearch();
         })
         .catch(err => {
           console.error('Failed to load magazines from Google Sheets', err);

@@ -312,12 +312,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const data = await fetchSheetData();
 
-  data.forEach(item => {
-    const type = item.type.toLowerCase();
-    if(type === "article") document.getElementById("articles-row").insertAdjacentHTML("beforeend", createCard(item));
-    else if(type === "magazine") document.getElementById("magazines-row").insertAdjacentHTML("beforeend", createCard(item));
-    else if(type === "newsletter") document.getElementById("newsletter-row").insertAdjacentHTML("beforeend", createCard(item));
-  });
+  // Skip adding any cards here; articles, magazines, and newsletters are handled by dedicated scripts below
 
   // Update View All button text dynamically
   const viewAllBtn = document.getElementById('viewAllBtn');
@@ -328,7 +323,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       viewAllBtn.textContent = `View All ${tabText}`;
       if(tabText === "Articles") viewAllBtn.href = "allarticles.html"; 
       else if(tabText === "Magazines") viewAllBtn.href = "allmagazine.html"; 
-      else viewAllBtn.href = "allnews.html";
+      else viewAllBtn.href = "allnewsletter.html";
     });
   });
 });
@@ -789,6 +784,116 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       renderLatest();
     }
+  })();
+
+  // Populate the Articles tab with a single latest article from the Articles sheet
+  (function() {
+    const SHEET_ID = '1sBiQwlh3i44CiOOMk4M13aPPnE2-sc2pPIGFxl46Sow';
+    const SHEET_NAME = 'Sheet1';
+    const GVIZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+    function parseGviz(jsonpText) {
+      const start = jsonpText.indexOf('(') + 1;
+      const end = jsonpText.lastIndexOf(')');
+      const json = JSON.parse(jsonpText.substring(start, end));
+      return (json.table.rows || [])
+        .filter(r => r && r.c)
+        .map(r => r.c.map(c => (c && (c.f || c.v)) ? (c.f || c.v) : ''));
+    }
+
+    function formatDate(value) {
+      try {
+        const d = new Date(value);
+        if (!isNaN(d)) return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+        return value;
+      } catch (_) { return value || ''; }
+    }
+
+    function createArticleCard(item, id) {
+      const title = item[0] || '';
+      const description = item[1] || '';
+      const author = item[3] || 'MIT Quill Team';
+      const date = formatDate(item[4] || '');
+      return `
+        <div class="col-md-6 col-lg-4">
+          <div class="card article-card shadow-sm border-0">
+            <div class="card-body py-3 px-3 d-flex flex-column">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="badge category-gold fw-bold">article</span>
+                <span class="badge bg-light text-secondary">5 min read</span>
+              </div>
+              <h5 class="card-title mt-1">${title}</h5>
+              <p class="card-text">${description}</p>
+              <p class="text-muted mb-2">${author}${author && date ? ' • ' : ''}${date}</p>
+              <a href="article.html?id=${encodeURIComponent(id)}" class="btn btn-sm btn-outline-secondary align-self-start">Read Full Article</a>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderLatest() {
+      fetch(GVIZ_URL)
+        .then(r => r.text())
+        .then(text => parseGviz(text))
+        .then(rows => {
+          const data = rows.filter(r => (r[0] || '').toString().trim().length > 0 && r[0] !== 'Heading');
+          if (!data.length) return;
+          const latestIndex = data.length - 1;
+          const latest = data[latestIndex];
+          const container = document.getElementById('articles-row');
+          if (!container) return;
+          container.innerHTML = createArticleCard(latest, latestIndex);
+        })
+        .catch(err => console.error('Failed to load article card for homepage', err));
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderLatest); else renderLatest();
+  })();
+
+  // Populate the Newsletter tab with a single latest newsletter from the Newsletter sheet
+  (function() {
+    const SHEET_ID = '1ebBDTG0IiRfjNNlMwPzYdfe6VLe3spRBS3sGX7_OyX8';
+    const SHEET_NAME = 'Sheet1';
+    const GVIZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+    function parseGviz(t){
+      const s = t.indexOf('(')+1, e = t.lastIndexOf(')');
+      const j = JSON.parse(t.substring(s,e));
+      return (j.table.rows||[]).filter(r=>r&&r.c).map(r=>r.c.map(c=> (c && (c.f||c.v)) ? (c.f||c.v) : ''));
+    }
+    function formatDate(v){ try{ const d=new Date(v); if(!isNaN(d)) return d.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}); return v; }catch(_){ return v||''; } }
+
+    function createNewsletterCard(item, id){
+      const title = item[0]||''; const desc=item[1]||''; const author=item[3]||'MIT Quill Team'; const date=formatDate(item[4]||''); const time=item[5]||'';
+      return `
+        <div class="col-md-6 col-lg-4">
+          <div class="card article-card shadow-sm border-0" style="border-left:4px solid #0d6efd;background:#f8fbff;">
+            <div class="card-body py-3 px-3 d-flex flex-column">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="badge bg-primary-subtle text-primary fw-bold">newsletter</span>
+                <span class="badge bg-light text-secondary">${time || 'midday'}</span>
+              </div>
+              <h5 class="card-title mt-1">${title}</h5>
+              <p class="card-text">${desc}</p>
+              <p class="text-muted mb-2">${author}${author && date ? ' • ' : ''}${date}</p>
+              <a href="newsletter.html?id=${encodeURIComponent(id)}" class="btn btn-sm btn-outline-primary align-self-start">Read Newsletter</a>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderLatest(){
+      fetch(GVIZ_URL).then(r=>r.text()).then(parseGviz).then(rows=>{
+        const data = rows.filter(r => (r[0]||'').toString().trim().length>0 && r[0]!== 'Heading');
+        if(!data.length) return;
+        const latestIndex = data.length-1; const latest = data[latestIndex];
+        const container = document.getElementById('newsletter-row');
+        if(!container) return;
+        container.innerHTML = createNewsletterCard(latest, latestIndex);
+      }).catch(err=>console.error('Failed to load newsletter card for homepage', err));
+    }
+
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', renderLatest); else renderLatest();
   })();
   </script>
 
