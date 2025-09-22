@@ -1,6 +1,1 @@
-Thanks for downloading this template!
-
-Template Name: Imperial
-Template URL: https://bootstrapmade.com/imperial-free-onepage-bootstrap-theme/
-Author: BootstrapMade.com
-License: https://bootstrapmade.com/license/
+To test this project, try cloning this project and run in live server
