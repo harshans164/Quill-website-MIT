@@ -53,6 +53,7 @@
               <li><a href="#">Dropdown 4</a></li>
             </ul>
           </li>
+          <li><a href="#events">Events</a></li>
           <li><a href="#archive">Archive</a></li>
           <li><a href="#contact">Contact Us</a></li>
         </ul>
@@ -213,23 +214,40 @@
     <!-- Tab Content -->
     <div class="tab-content" id="contentTabsContent">
       
-      <!-- Articles -->
-      <div class="tab-pane fade show active" id="articles-content" role="tabpanel">
-        <div class="row g-4 justify-content-center" id="articles-row"></div>
+     <!-- Articles -->
+<div class="tab-pane fade show active" id="articles-content" role="tabpanel">
+  <div class="row g-4 justify-content-center" id="articles-row">
+    <!-- Spinner -->
+    <div class="text-center w-100 py-5" id="articles-spinner">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
-
-      <!-- Magazines -->
-      <div class="tab-pane fade" id="magazines-content" role="tabpanel">
-        <div class="row g-4 justify-content-center" id="magazines-row"></div>
-      </div>
-
-      <!-- Newsletter -->
-      <div class="tab-pane fade" id="newsletter-content" role="tabpanel">
-        <div class="row g-4 justify-content-center" id="newsletter-row"></div>
-      </div>
-
     </div>
   </div>
+</div>
+
+<!-- Magazines -->
+<div class="tab-pane fade" id="magazines-content" role="tabpanel">
+  <div class="row g-4 justify-content-center" id="magazines-row">
+    <div class="text-center w-100 py-5" id="magazines-spinner">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Newsletter -->
+<div class="tab-pane fade" id="newsletter-content" role="tabpanel">
+  <div class="row g-4 justify-content-center" id="newsletter-row">
+    <div class="text-center w-100 py-5" id="newsletter-spinner">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 </section>
 
 <!-- View All Button -->
@@ -346,7 +364,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       <!-- Bearer 1 -->
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
         <div class="card bearer-card h-100 shadow-sm border-0 text-center p-3">
-          <img src="assets/img/team/team-1.jpg" class="rounded-circle bearer-img mx-auto mb-3" alt="Emily Watson">
           <h4 class="card-title">Emily Watson</h4>
           <span class="text-muted d-block mb-2">President • Senior • Literature & Creative Writing</span>
           <ul class="list-inline mb-0">
@@ -359,7 +376,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       <!-- Bearer 2 -->
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
         <div class="card bearer-card h-100 shadow-sm border-0 text-center p-3">
-          <img src="assets/img/team/team-2.jpg" class="rounded-circle bearer-img mx-auto mb-3" alt="David Chen">
           <h4 class="card-title">David Chen</h4>
           <span class="text-muted d-block mb-2">Vice President • Junior • Computer Science & Literature</span>
           <ul class="list-inline mb-0">
@@ -372,7 +388,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       <!-- Bearer 3 -->
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
         <div class="card bearer-card h-100 shadow-sm border-0 text-center p-3">
-          <img src="assets/img/team/team-3.jpg" class="rounded-circle bearer-img mx-auto mb-3" alt="Sophia Patel">
           <h4 class="card-title">Sophia Patel</h4>
           <span class="text-muted d-block mb-2">Secretary • Sophomore • Comparative Literature</span>
           <ul class="list-inline mb-0">
@@ -411,6 +426,51 @@ document.addEventListener("DOMContentLoaded", async () => {
 </style>
 
 
+<!-- Events Section -->
+<section id="events" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-4">Our Events</h2>
+    <p class="text-center mb-5">
+      MIT Quill organizes engaging literary events that inspire creativity, 
+      collaboration, and critical thinking. Our two flagship events are 
+      <strong>Initium</strong> and <strong>Renaissance</strong>.
+    </p>
+
+    <div class="row g-4">
+      
+      <!-- Initium Event -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="assets/img/events/initium.jpg" class="card-img-top" alt="Initium Event">
+          <div class="card-body">
+            <h4 class="card-title">Initium</h4>
+            <p class="card-text">
+              An inter-college literary fest that marks the beginning of every academic year. 
+              Initium brings together budding writers, poets, and thinkers to showcase 
+              their talent through competitions, workshops, and performances.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Renaissance Event -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="assets/img/events/renaissance.jpg" class="card-img-top" alt="Renaissance Event">
+          <div class="card-body">
+            <h4 class="card-title">Renaissance</h4>
+            <p class="card-text">
+              A celebration of literature and cultural revival. Renaissance features 
+              thought-provoking debates, creative writing contests, and guest lectures 
+              from distinguished authors, fostering a spirit of intellectual renewal.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 
 <!-- Testimonials Section -->
@@ -419,7 +479,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
     <h2>Archives</h2>
-    <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+    <p>
+      A collection of memorable quotes and reflections shared by our past members, 
+      capturing their experiences and journey with the Quill Club.
+    </p>
   </div><!-- End Section Title -->
 
   <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -442,6 +505,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       </script>
       <div class="swiper-wrapper">
 
+        <!-- Quote 1 -->
         <div class="swiper-slide">
           <div class="testimonial-item">
             <div class="row gy-4 justify-content-center">
@@ -449,23 +513,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="testimonial-content">
                   <p>
                     <i class="bi bi-quote quote-icon-left"></i>
-                    <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
+                    <span>Quill Club gave me the confidence to share my thoughts on stage for the first time. It truly shaped my voice as a writer.</span>
                     <i class="bi bi-quote quote-icon-right"></i>
                   </p>
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                  </div>
+                  <h3>Ananya Sharma</h3>
+                  <h4>Batch of 2022</h4>
                 </div>
               </div>
               <div class="col-lg-2 text-center">
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="img-fluid testimonial-img" alt="">
+                <img src="assets/img/testimonials/testimonials-1.jpg" class="img-fluid testimonial-img" alt="Ananya Sharma">
               </div>
             </div>
           </div>
         </div><!-- End testimonial item -->
 
+        <!-- Quote 2 -->
         <div class="swiper-slide">
           <div class="testimonial-item">
             <div class="row gy-4 justify-content-center">
@@ -473,23 +535,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="testimonial-content">
                   <p>
                     <i class="bi bi-quote quote-icon-left"></i>
-                    <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
+                    <span>The discussions and workshops were more than activities — they were safe spaces where creativity thrived.</span>
                     <i class="bi bi-quote quote-icon-right"></i>
                   </p>
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                  </div>
+                  <h3>Rahul S</h3>
+                  <h4>Batch of 2021</h4>
                 </div>
               </div>
               <div class="col-lg-2 text-center">
-                <img src="assets/img/testimonials/testimonials-2.jpg" class="img-fluid testimonial-img" alt="">
+                <img src="assets/img/testimonials/testimonials-2.jpg" class="img-fluid testimonial-img" alt="Rahul Iyer">
               </div>
             </div>
           </div>
         </div><!-- End testimonial item -->
 
+        <!-- Quote 3 -->
         <div class="swiper-slide">
           <div class="testimonial-item">
             <div class="row gy-4 justify-content-center">
@@ -497,23 +557,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="testimonial-content">
                   <p>
                     <i class="bi bi-quote quote-icon-left"></i>
-                    <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
+                    <span>Quill Club was a family — a place where words, laughter, and learning went hand in hand.</span>
                     <i class="bi bi-quote quote-icon-right"></i>
                   </p>
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                  </div>
+                  <h3>Meera P</h3>
+                  <h4>Batch of 2020</h4>
                 </div>
               </div>
               <div class="col-lg-2 text-center">
-                <img src="assets/img/testimonials/testimonials-3.jpg" class="img-fluid testimonial-img" alt="">
+                <img src="assets/img/testimonials/testimonials-3.jpg" class="img-fluid testimonial-img" alt="Meera Nair">
               </div>
             </div>
           </div>
         </div><!-- End testimonial item -->
 
+        <!-- Quote 4 -->
         <div class="swiper-slide">
           <div class="testimonial-item">
             <div class="row gy-4 justify-content-center">
@@ -521,18 +579,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="testimonial-content">
                   <p>
                     <i class="bi bi-quote quote-icon-left"></i>
-                    <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
+                    <span>The events we organized remain some of my fondest memories of college life. Quill Club was truly unforgettable.</span>
                     <i class="bi bi-quote quote-icon-right"></i>
                   </p>
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                  </div>
+                  <h3>Arjun N</h3>
+                  <h4>Batch of 2019</h4>
                 </div>
               </div>
               <div class="col-lg-2 text-center">
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="img-fluid testimonial-img" alt="">
+                <img src="assets/img/testimonials/testimonials-4.jpg" class="img-fluid testimonial-img" alt="Arjun Menon">
               </div>
             </div>
           </div>
@@ -544,153 +599,56 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   </div>
 
-</section><!-- /Testimonials Section -->
+</section><!-- /Archives Section -->
 
 
 
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4">
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
-              <i class="bi bi-geo-alt flex-shrink-0"></i>
-              <div>
-                <h3>Address</h3>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
-            </div><!-- End Info Item -->
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-              <i class="bi bi-telephone flex-shrink-0"></i>
-              <div>
-                <h3>Call Us</h3>
-                <p>+1 5589 55488 55</p>
-              </div>
-            </div><!-- End Info Item -->
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-envelope flex-shrink-0"></i>
-              <div>
-                <h3>Email Us</h3>
-                <p>info@example.com</p>
-              </div>
-            </div><!-- End Info Item -->
-
-          </div>
-
-          <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
-            </form>
-          </div><!-- End Contact Form -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Contact Section -->
+    
 
   </main>
 
-  <footer id="footer" class="footer dark-background">
+<footer id="footer" class="footer dark-background">
 
-    <div class="container">
-      <div class="row gy-3">
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-geo-alt icon"></i>
-          <div class="address">
-            <h4>Address</h4>
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p></p>
-          </div>
-
+  <div class="container text-center">
+    <div class="row gy-3 justify-content-center">
+      
+      <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center">
+        <i class="bi bi-geo-alt icon mb-2"></i>
+        <div class="address">
+          <h4>Address</h4>
+          <p>Madras Institute Of Technology</p>
+          <p>Chrompet, Chennai - 600044</p>
         </div>
-
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-telephone icon"></i>
-          <div>
-            <h4>Contact</h4>
-            <p>
-              <strong>Phone:</strong> <span>+1 5589 55488 55</span><br>
-              <strong>Email:</strong> <span>info@example.com</span><br>
-            </p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-clock icon"></i>
-          <div>
-            <h4>Opening Hours</h4>
-            <p>
-              <strong>Mon-Sat:</strong> <span>11AM - 23PM</span><br>
-              <strong>Sunday</strong>: <span>Closed</span>
-            </p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <h4>Follow Us</h4>
-          <div class="social-links d-flex">
-            <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-
       </div>
-    </div>
 
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Imperial</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center">
+        <i class="bi bi-envelope icon mb-2"></i>
+        <div>
+          <h4>Contact</h4>
+          <p><strong>Email:</strong> themitquill@gmail.com</p>
+        </div>
       </div>
-    </div>
 
-  </footer>
+      <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center">
+        <h4>Follow Us</h4>
+        <div class="social-links d-flex justify-content-center">
+          <a href="https://www.facebook.com/TheMITQuill" class="facebook mx-2"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/themitquill/?hl=en" class="instagram mx-2"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/the-mit-quill/about" class="linkedin mx-2"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container text-center mt-4">
+    <p>© <span>Copyright</span> <strong class="px-1 sitename">MIT QUILL</strong> <span>All Rights Reserved</span></p>
+  </div>
+
+</footer>
+
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
