@@ -100,8 +100,17 @@
       </div>
     </div>
 
-    <div class="row g-4" id="magazinesRow"></div>
-    <div class="text-center text-muted my-4" id="magazinesEmpty" style="display:none;">No results</div>
+    <!-- Spinner -->
+<div class="text-center my-5" id="magazinesLoading">
+  <div class="spinner-border text-warning" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <p class="mt-2">Loading magazines...</p>
+</div>
+
+<div class="row g-4" id="magazinesRow"></div>
+<div class="text-center text-muted my-4" id="magazinesEmpty" style="display:none;">No results</div>
+
   </div>
 
   <!-- Bootstrap JS -->
@@ -217,18 +226,24 @@
         });
       }
 
-      fetch(GVIZ_URL)
-        .then(r => r.text())
-        .then(text => parseGviz(text))
-        .then(rows => {
-          // Filter out empty rows and possible header row
-          allData = rows.filter(r => (r[0] || '').toString().trim().length > 0 && r[0] !== 'Heading');
-          renderList(allData, '');
-          attachSearch();
-        })
-        .catch(err => {
-          console.error('Failed to load magazines from Google Sheets', err);
-        });
+fetch(GVIZ_URL)
+  .then(r => r.text())
+  .then(text => parseGviz(text))
+  .then(rows => {
+    // Filter out empty rows and possible header row
+    allData = rows.filter(r => (r[0] || '').toString().trim().length > 0 && r[0] !== 'Heading');
+
+    // Hide spinner once data is ready
+    document.getElementById('magazinesLoading').style.display = 'none';
+
+    renderList(allData, '');
+    attachSearch();
+  })
+  .catch(err => {
+    console.error('Failed to load magazines from Google Sheets', err);
+    document.getElementById('magazinesLoading').style.display = 'none';
+  });
+
     })();
   </script>
 </body>

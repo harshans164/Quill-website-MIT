@@ -33,8 +33,17 @@
   </div>
 
   <div class="container">
-    <div class="row g-4 justify-content-center" id="newsletterRow"></div>
-    <div class="text-center text-muted my-4" id="newsletterEmpty" style="display:none;">No results</div>
+<!-- Loading Spinner -->
+<div class="text-center my-5" id="newsletterLoading">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <p class="mt-2">Loading newsletters...</p>
+</div>
+
+<div class="row g-4 justify-content-center" id="newsletterRow"></div>
+<div class="text-center text-muted my-4" id="newsletterEmpty" style="display:none;">No results</div>
+
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -75,11 +84,37 @@
       let allData=[];
       function renderList(list,q){ const row=document.getElementById('newsletterRow'); const empty=document.getElementById('newsletterEmpty'); row.innerHTML=''; if(!list.length){ empty.style.display=''; return; } empty.style.display='none'; list.forEach((it,idx)=> row.appendChild(createCard(it,idx,q))); }
 
-      fetch(GVIZ_URL).then(r=>r.text()).then(parseGviz).then(rows=>{
-        allData = rows.filter(r => (r[0]||'').toString().trim().length>0 && r[0] !== 'Heading');
-        renderList(allData,'');
-        const input=document.getElementById('newsSearch'); if(input){ input.addEventListener('input',()=>{ const q=input.value.trim(); if(!q){ renderList(allData,''); return; } const ql=q.toLowerCase(); const filtered=allData.filter(r=> (r[0]||'').toString().toLowerCase().includes(ql) || (r[1]||'').toString().toLowerCase().includes(ql) || (r[3]||'').toString().toLowerCase().includes(ql)); renderList(filtered,q); }); }
-      }).catch(err=>console.error('Failed to load newsletters', err));
+fetch(GVIZ_URL)
+  .then(r => r.text())
+  .then(parseGviz)
+  .then(rows => {
+    allData = rows.filter(r => (r[0]||'').toString().trim().length>0 && r[0] !== 'Heading');
+
+    // Hide spinner
+    document.getElementById('newsletterLoading').style.display = 'none';
+
+    renderList(allData,'');
+    
+    const input = document.getElementById('newsSearch');
+    if(input){
+      input.addEventListener('input', () => {
+        const q = input.value.trim();
+        if(!q){ renderList(allData,''); return; }
+        const ql = q.toLowerCase();
+        const filtered = allData.filter(r =>
+          (r[0]||'').toString().toLowerCase().includes(ql) ||
+          (r[1]||'').toString().toLowerCase().includes(ql) ||
+          (r[3]||'').toString().toLowerCase().includes(ql)
+        );
+        renderList(filtered,q);
+      });
+    }
+  })
+  .catch(err => {
+    console.error('Failed to load newsletters', err);
+    document.getElementById('newsletterLoading').style.display = 'none';
+  });
+
     })();
   </script>
 </body>
