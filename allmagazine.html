@@ -163,7 +163,7 @@
             <h5 class="card-title mt-1">${title}</h5>
             <p class="card-text">${description}</p>
             <p class="author-date">${author}${author && date ? ' • ' : ''}${formatDate(date)}</p>
-            <a href="magazine.html?id=${encodeURIComponent(id)}" class="read-btn">Read Full Magazine</a>
+            <a href="${item[5]}" class="read-btn" target="_blank">Read Full Magazine</a>
           </div>`;
         return col;
       }

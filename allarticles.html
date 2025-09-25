@@ -171,7 +171,7 @@
               <h5 class="card-title article-headline mt-1">${highlight(title, query)}</h5>
               <p class="card-text article-text">${highlight(description, query)}</p>
               <p class="author-date article-meta">${highlight(author, query)}${author && date ? ' • ' : ''}${formatDate(date)}</p>
-              <a href="${item[2] ? decodeURIComponent(item[2]) : `article.html?id=${encodeURIComponent(id)}`}" class="btn btn-sm btn-outline-secondary btn-read align-self-start" target="_blank">Read Full Article</a>
+              <a href="${item[5]}" class="btn btn-sm btn-outline-secondary btn-read align-self-start" target="_blank">Read Full Article</a>
             </div>
           </div>`;
         return col;
