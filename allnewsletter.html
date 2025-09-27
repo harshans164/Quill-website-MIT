@@ -1,122 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Newsletters - MIT Quill</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <style>
-    body { font-family: 'Roboto', sans-serif; background-color: #f8f9fa; }
-    .page-header { padding: 3rem 1rem 2rem; text-align: center; background-color: #fff; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 12px; }
-    .search-bar { max-width: 480px; margin: 1rem auto 2rem; }
-    /* News-style card */
-    .newsletter-card { border-radius: 12px; background: #ffffff; border: 1px solid #e6edf5; max-width: 720px; overflow: hidden; }
-    .newsletter-card:hover { box-shadow: 0 10px 28px rgba(13,110,253,0.12); transform: translateY(-3px); transition: all .25s ease; }
-    .news-ribbon { height: 4px; background: linear-gradient(90deg, #0d6efd, #6ea8fe); }
-    .news-headline { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; letter-spacing: .2px; }
-    .news-meta { font-size: .875rem; color: #6c757d; }
-    .news-meta i { opacity: .75; margin-right: .35rem; }
-    .news-snippet { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: #495057; }
-    .badge-soft-primary { background-color: #e7f1ff; color: #0d6efd; border: 1px solid #d3e3ff; }
-    mark { background-color: #fff3cd; padding: 0 2px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Newsletters - MIT Quill</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Back to Home button */
+.back-home-btn {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+.back-home-btn:hover {
+  background-color: #fff8dc;
+  border-color: #FFD700;
+  color: #000;
+  text-decoration: none;
+}
+
+/* Page header */
+.page-header {
+  padding: 3rem 1rem 2rem;
+  text-align: center;
+  background-color: #fff;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 12px;
+}
+.search-bar {
+  max-width: 400px;
+  margin: 1rem auto 2rem;
+}
+
+/* Newsletter cards - article style */
+.newsletter-card {
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
+  border: 1px solid #ececec;
+  border-left: 4px solid #FFD700;
+  max-width: 520px;
+  margin: auto;
+}
+.newsletter-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+}
+
+.newsletter-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.badge-category {
+  color: #FFD700;
+  background-color: #fff8dc;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+}
+
+.card-text {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  min-height: 60px;
+}
+
+.author-date {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+}
+
+.read-btn {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.read-btn:hover {
+  background-color: #fff8dc;
+  border-color: #FFD700;
+  color: black;
+}
+
+
+mark { background-color: #fff3cd; padding: 0 2px; }
+</style>
 </head>
 <body>
-  <div class="container my-4">
-    <a href="index.html" class="btn btn-outline-secondary">&larr; Back to Home</a>
-  </div>
+
+<div class="container my-4">
+  <a href="index.html" class="back-home-btn"><i class="bi bi-house-door"></i> Back to Home</a>
+
   <div class="page-header">
     <h1>All Newsletters</h1>
     <p>Browse all of our periodic newsletters designed for quick, informative reads.</p>
     <input type="text" id="newsSearch" class="form-control search-bar" placeholder="Search newsletters...">
   </div>
 
-  <div class="container">
-<!-- Loading Spinner -->
-<div class="text-center my-5" id="newsletterLoading">
-  <div class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
+  <!-- Spinner -->
+  <div class="text-center my-5" id="newsletterLoading">
+    <div class="spinner-border text-warning" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Loading newsletters...</p>
   </div>
-  <p class="mt-2">Loading newsletters...</p>
+
+  <!-- Newsletters row -->
+  <div class="row g-4 justify-content-center" id="newsletterRow"></div>
+  <div class="text-center text-muted my-4" id="newsletterEmpty" style="display:none;">No results</div>
 </div>
 
-<div class="row g-4 justify-content-center" id="newsletterRow"></div>
-<div class="text-center text-muted my-4" id="newsletterEmpty" style="display:none;">No results</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(function(){
+  const SHEET_ID = '1ebBDTG0IiRfjNNlMwPzYdfe6VLe3spRBS3sGX7_OyX8';
+  const SHEET_NAME = 'Sheet1';
+  const GVIZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
 
-  </div>
+  function parseGviz(t){
+    const s=t.indexOf('(')+1,e=t.lastIndexOf(')');
+    const j=JSON.parse(t.substring(s,e));
+    return (j.table.rows||[]).filter(r=>r&&r.c)
+      .map(r=> r.c.map(c=> (c&&(c.f||c.v)) ? (c.f||c.v) : ''));
+  }
+  function formatDate(v){ try{ const d=new Date(v); if(!isNaN(d)) return d.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}); return v; }catch(_){ return v||'';} }
+  function escapeHtml(str){ return String(str).replace(/[&<>"']/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[ch])); }
+  function highlight(text,q){ if(!q) return escapeHtml(text); const safe=escapeHtml(text); const pat=new RegExp(`(${q.replace(/[.*+?^${}()|[\\]\\]/g,'\\$&')})`,'ig'); return safe.replace(pat,'<mark>$1</mark>'); }
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    (function(){
-      const SHEET_ID = '1ebBDTG0IiRfjNNlMwPzYdfe6VLe3spRBS3sGX7_OyX8';
-      const SHEET_NAME = 'Sheet1';
-      const GVIZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+function createCard(item,id,q){
+  const title=item[0]||''; 
+  const desc=item[1]||''; 
+  const author=item[3]||''; 
+  const date=item[4]||''; 
+  const link=item[5]||'';
+  const col=document.createElement('div'); 
+  col.className='col-md-6 col-lg-4';
+  col.innerHTML=`
+    <div class="card newsletter-card shadow-sm p-3">
+      <div class="d-flex justify-content-between mb-2">
+        <span class="badge badge-category fw-bold">Newsletter</span>
+      </div>
+      <h5 class="newsletter-title mt-1">${highlight(title,q)}</h5>
+      <p class="card-text">${highlight(desc,q)}</p>
+      <p class="author-date">${highlight(author,q)}${author && date ? ' • ' : ''}${formatDate(date)}</p>
+      <a href="${link}" class="btn btn-sm btn-outline-secondary read-btn align-self-start" target="_blank">Read Full Newsletter</a>
+    </div>`;
+  return col;
+}
 
-      function parseGviz(t){ const s=t.indexOf('(')+1,e=t.lastIndexOf(')'); const j=JSON.parse(t.substring(s,e)); return (j.table.rows||[]).filter(r=>r&&r.c).map(r=> r.c.map(c=> (c&&(c.f||c.v)) ? (c.f||c.v) : '')); }
-      function formatDate(v){ try{ const d=new Date(v); if(!isNaN(d)) return d.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}); return v; }catch(_){ return v||'';} }
-      function escapeHtml(str){ return String(str).replace(/[&<>"']/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[ch])); }
-      function highlight(text, q){ if(!q) return escapeHtml(text); const safe=escapeHtml(text); const pat=new RegExp(`(${q.replace(/[.*+?^${}()|[\\]\\]/g,'\\$&')})`,'ig'); return safe.replace(pat,'<mark>$1</mark>'); }
 
-      function createCard(item, id, q){
-        const title=item[0]||''; const desc=item[1]||''; const author=item[3]||''; const date=item[4]||''; const time=item[5]||'';
-        const col=document.createElement('div'); col.className='col-md-6 col-lg-6';
-        col.innerHTML=`
-          <div class="card newsletter-card shadow-sm">
-            <div class="news-ribbon"></div>
-            <div class="p-3 p-md-4">
-              <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="badge badge-soft-primary fw-bold"><i class="bi bi-newspaper"></i> Newsletter</span>
-                <span class="news-meta"><i class="bi bi-clock"></i>${escapeHtml(time)}</span>
-              </div>
-              <h5 class="card-title news-headline mb-2">${highlight(title,q)}</h5>
-              <p class="card-text news-snippet mb-2">${highlight(desc,q)}</p>
-              <div class="news-meta mb-3">
-                <span><i class="bi bi-person"></i>${highlight(author,q)}</span>
-                <span class="ms-2"><i class="bi bi-calendar-event"></i>${formatDate(date)}</span>
-              </div>
-              <a href="${item[5]}" class="btn btn-sm btn-primary" target="_blank"><i class="bi bi-box-arrow-up-right"></i> Read Newsletter</a>
-            </div>
-          </div>`;
-        return col;
-      }
+  let allData=[];
+  function renderList(list,q){
+    const row=document.getElementById('newsletterRow'); 
+    const empty=document.getElementById('newsletterEmpty'); 
+    row.innerHTML=''; 
+    if(!list.length){ empty.style.display=''; return; } 
+    empty.style.display='none'; 
+    list.forEach((it,idx)=> row.appendChild(createCard(it,idx,q)));
+  }
 
-      let allData=[];
-      function renderList(list,q){ const row=document.getElementById('newsletterRow'); const empty=document.getElementById('newsletterEmpty'); row.innerHTML=''; if(!list.length){ empty.style.display=''; return; } empty.style.display='none'; list.forEach((it,idx)=> row.appendChild(createCard(it,idx,q))); }
-
-fetch(GVIZ_URL)
-  .then(r => r.text())
-  .then(parseGviz)
-  .then(rows => {
-    allData = rows.filter(r => (r[0]||'').toString().trim().length>0 && r[0] !== 'Heading');
-
-    // Hide spinner
-    document.getElementById('newsletterLoading').style.display = 'none';
-
+  fetch(GVIZ_URL).then(r=>r.text()).then(parseGviz).then(rows=>{
+    allData=rows.filter(r=>(r[0]||'').toString().trim().length>0 && r[0]!=='Heading');
+    document.getElementById('newsletterLoading').style.display='none';
     renderList(allData,'');
-    
-    const input = document.getElementById('newsSearch');
+    const input=document.getElementById('newsSearch');
     if(input){
-      input.addEventListener('input', () => {
-        const q = input.value.trim();
+      input.addEventListener('input',()=>{
+        const q=input.value.trim();
         if(!q){ renderList(allData,''); return; }
-        const ql = q.toLowerCase();
-        const filtered = allData.filter(r =>
-          (r[0]||'').toString().toLowerCase().includes(ql) ||
-          (r[1]||'').toString().toLowerCase().includes(ql) ||
-          (r[3]||'').toString().toLowerCase().includes(ql)
-        );
+        const ql=q.toLowerCase();
+        const filtered=allData.filter(r=>{
+          return (r[0]||'').toString().toLowerCase().includes(ql) ||
+                 (r[1]||'').toString().toLowerCase().includes(ql) ||
+                 (r[3]||'').toString().toLowerCase().includes(ql);
+        });
         renderList(filtered,q);
       });
     }
-  })
-  .catch(err => {
-    console.error('Failed to load newsletters', err);
-    document.getElementById('newsletterLoading').style.display = 'none';
-  });
-
-    })();
-  </script>
+  }).catch(err=>{ console.error('Failed to load newsletters',err); document.getElementById('newsletterLoading').style.display='none'; });
+})();
+</script>
 </body>
 </html>
-

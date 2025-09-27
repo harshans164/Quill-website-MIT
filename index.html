@@ -289,6 +289,32 @@
     border-color: #FFD700;
     text-decoration: none;
   }
+  /* Golden Tabs */
+.nav-tabs {
+  border-bottom: 2px solid #FFD700; /* golden underline */
+  justify-content: center; /* ensures center alignment */
+}
+
+.nav-tabs .nav-link {
+  color: #555; /* default text */
+  font-weight: 500;
+  border: none;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link.active {
+  color: #000;
+  background-color: #FFD700; /* golden tab */
+  border-radius: 6px 6px 0 0;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #000;
+  background-color: #fff8dc; /* light gold hover */
+  border-radius: 6px 6px 0 0;
+}
+
 </style>
 
 <!-- Bootstrap JS -->
@@ -521,7 +547,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
               </div>
               <div class="col-lg-2 text-center">
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="img-fluid testimonial-img" alt="Ananya Sharma">
               </div>
             </div>
           </div>
@@ -543,7 +568,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
               </div>
               <div class="col-lg-2 text-center">
-                <img src="assets/img/testimonials/testimonials-2.jpg" class="img-fluid testimonial-img" alt="Rahul Iyer">
               </div>
             </div>
           </div>
@@ -565,7 +589,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
               </div>
               <div class="col-lg-2 text-center">
-                <img src="assets/img/testimonials/testimonials-3.jpg" class="img-fluid testimonial-img" alt="Meera Nair">
               </div>
             </div>
           </div>
@@ -587,7 +610,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
               </div>
               <div class="col-lg-2 text-center">
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="img-fluid testimonial-img" alt="Arjun Menon">
               </div>
             </div>
           </div>
@@ -829,13 +851,13 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div class="card article-card shadow-sm border-0" style="border-left:4px solid #0d6efd;background:#f8fbff;">
             <div class="card-body py-3 px-3 d-flex flex-column">
               <div class="d-flex justify-content-between mb-2">
-                <span class="badge bg-primary-subtle text-primary fw-bold">newsletter</span>
-                <span class="badge bg-light text-secondary">${time || 'midday'}</span>
+<span class="badge category-gold fw-bold">newsletter</span>
+<span class="badge bg-light text-secondary">5 min read</span>
               </div>
               <h5 class="card-title mt-1">${title}</h5>
               <p class="card-text">${desc}</p>
               <p class="text-muted mb-2">${author}${author && date ? ' • ' : ''}${date}</p>
-              <a href="${item[5]}" class="btn btn-sm btn-outline-primary align-self-start" target="_blank">Read Newsletter</a>
+<a href="${item[5]}" class="btn btn-sm btn-outline-secondary align-self-start" target="_blank">Read Newsletter</a>
             </div>
           </div>
         </div>`;
