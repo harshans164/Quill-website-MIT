@@ -1168,10 +1168,13 @@ section,
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
   background-color: var(--accent-color);
 }
-
 /*--------------------------------------------------------------
 # Team Section
 --------------------------------------------------------------*/
+
+
+
+
 .team .team-member {
   background-color: var(--surface-color);
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);

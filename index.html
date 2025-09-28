@@ -8,26 +8,134 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
 
-  <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  
+  <style>
+    /* 1. Enhanced Color Palette */
+    .bg-subtle {
+      background-color: #fdfaf6; /* Soft, elegant off-white */
+    }
+
+    /* 2. Ken Burns Effect for Hero Background */
+    .hero {
+      overflow: hidden; /* Important to contain the zooming image */
+    }
+    .hero .hero-bg {
+      animation: kenburns 20s ease-out infinite;
+    }
+    @keyframes kenburns {
+      0% {
+        transform: scale(1) translate(0, 0);
+      }
+      50% {
+        transform: scale(1.1) translate(-5px, 10px);
+      }
+      100% {
+        transform: scale(1) translate(0, 0);
+      }
+    }
+
+    /* 3. Gradient Section Titles */
+    .section-title h2 {
+      background: linear-gradient(45deg, #444444, #b59450);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    /* 4. Enhanced "View All" Button Animation */
+    .view-all-btn {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      color: black;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 0.5rem 1.2rem;
+      transition: color 0.4s ease-in-out;
+    }
+    .view-all-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #fff8dc; /* light gold */
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease-in-out;
+      z-index: -1;
+    }
+    .view-all-btn:hover {
+      color: black;
+      border-color: #FFD700;
+      text-decoration: none;
+    }
+    .view-all-btn:hover::before {
+      transform: scaleX(1);
+    }
+    
+    /* 5. Skeleton Loader Styles */
+    .skeleton-card {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      height: 100%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .skeleton {
+      background-color: #e0e0e0;
+      border-radius: 4px;
+      animation: shimmer 1.5s infinite linear;
+    }
+    .skeleton.title {
+      height: 20px;
+      width: 70%;
+      margin-bottom: 15px;
+    }
+    .skeleton.text {
+      height: 12px;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    .skeleton.text:last-child {
+      width: 80%;
+    }
+    .skeleton.image {
+      height: 200px;
+      width: 100%;
+      margin-bottom: 15px;
+      border-radius: 12px 12px 0 0;
+    }
+    @keyframes shimmer {
+      0% {
+        background-color: #e0e0e0;
+      }
+      50% {
+        background-color: #f0f0f0;
+      }
+      100% {
+        background-color: #e0e0e0;
+      }
+    }
+  </style>
 </head>
 
 <body class="index-page">
@@ -36,27 +144,18 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo-2.jpg" alt=""> 
+        <img src="assets/img/logo-2.jpg" alt="">
         <h1 class="sitename">Quill MIT</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero" class="active">Home</a></li> <!--replace with webpage link   -->
-          <li><a href="#about">About Us</a></li>
+          <li><a href="#hero" class="active">Home</a></li> <li><a href="#about">About Us</a></li>
           <li><a href="#articles">Articles & Magazines</a></li>
-          <li class="dropdown"><a href="#team"><span>Teams</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
-            </ul>
-          </li>
           <li><a href="#events">Events</a></li>
           <li><a href="#archive">Archive</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-        </ul>
+          <li class="dropdown"><a href="team.html"><span>Teams</span></a></li>
+          </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
@@ -65,453 +164,387 @@
 
   <main class="main">
 
-    <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
-
-      <img src="assets/img/hero-bg.jpg" class="hero-bg" alt="" data-aos="fade-in">
-
+      <img src="assets/img/hero-bg.jpg" class="hero-bg" alt="">
       <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
-        <!--<img src="assets/img/logo.png" class="img-fluid mb-3" alt="">-->
         <h2>Welcome to Quill MIT Webzone</h2>
-        <p>We <span class="typed" data-typed-items="are newsbody of MIT, write articles, post awareness memes"></span></p>
+        <p>We <span class="typed" data-typed-items="are the newsbody of MIT, write compelling articles, create awareness through media"></span></p>
         <div>
           <a href="#about" class="cta-btn">Get Started</a>
-          <a href="#services" class="cta-btn2">Our Services</a>
         </div>
       </div>
-
-    </section><!-- /Hero Section -->
-
-    <!-- About Section -->
-<!-- About Section -->
-<!-- About Section -->
-<section id="about" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center mb-3">About MIT Quill</h2>
+    </section>
     
-    <!-- Intro Paragraph -->
-    <p class="text-center mb-5 lead">
-      MIT Quill is the premier literary society at MIT, dedicated to nurturing creativity, critical thinking, and the timeless art of storytelling. We believe in the power of words to inspire, challenge, and transform.
-    </p>
-    
-    <div class="row g-4">
-      
-      <!-- Card 1 -->
-      <div class="col-md-6 col-lg-3">
-        <div class="card shadow-sm h-100 border-0 about-card">
-          <div class="card-body text-center py-4">
-            <i class="bi bi-book-half fs-1 mb-3 text-gold"></i>
-            <h5 class="card-title fw-bold">Literary Excellence</h5>
-            <p class="card-text">
-              Fostering a deep appreciation for literature through critical analysis, creative writing, and scholarly discussions.
-            </p>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Card 2 -->
-      <div class="col-md-6 col-lg-3">
-        <div class="card shadow-sm h-100 border-0 about-card">
-          <div class="card-body text-center py-4">
-            <i class="bi bi-people-fill fs-1 mb-3 text-gold"></i>
-            <h5 class="card-title fw-bold">Community Building</h5>
-            <p class="card-text">
-              Creating a vibrant community of writers, readers, and literary enthusiasts who support each other's growth.
-            </p>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Card 3 -->
-      <div class="col-md-6 col-lg-3">
-        <div class="card shadow-sm h-100 border-0 about-card">
-          <div class="card-body text-center py-4">
-            <i class="bi bi-calendar-event fs-1 mb-3 text-gold"></i>
-            <h5 class="card-title fw-bold">Regular Events</h5>
-            <p class="card-text">
-              Hosting workshops, poetry readings, author talks, and literary competitions throughout the academic year.
-            </p>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Card 4 -->
-      <div class="col-md-6 col-lg-3">
-        <div class="card shadow-sm h-100 border-0 about-card">
-          <div class="card-body text-center py-4">
-            <i class="bi bi-award-fill fs-1 mb-3 text-gold"></i>
-            <h5 class="card-title fw-bold">Recognition</h5>
-            <p class="card-text">
-              Celebrating outstanding literary achievements and providing platforms for emerging writers to showcase their work.
-            </p>
-          </div>
-        </div>
+    <section id="about" class="py-5 bg-subtle">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>About MIT Quill</h2>
+        <p>
+          MIT Quill is the premier literary society at MIT, dedicated to nurturing creativity, critical thinking, and the timeless art of storytelling. We believe in the power of words to inspire, challenge, and transform.
+        </p>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- Custom Hover Styles -->
-<style>
-  /* About Cards */
-  .about-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 12px;
-    min-height: 300px; /* makes card slightly rectangular */
-  }
-  .about-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Golden Icon Color */
-  .text-gold {
-    color: #FFD700; /* golden color */
-  }
-</style>
-
-<!-- Bootstrap Icons CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-
-<!-- Custom Hover Styles -->
-<style>
-  .about-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 12px;
-  }
-  .about-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  }
-</style>
-<!-- /About Section -->
-
-
-
-<!-- Articles & Magazines Section -->
-<section id="articles" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center mb-2">Articles and Magazines</h2>
-    <p class="text-center mb-5">
-      Discover thought-provoking essays, creative pieces, and literary analyses from our talented club members.
-    </p>
-
-    <!-- Tabs -->
-    <ul class="nav nav-tabs justify-content-center mb-4" id="contentTabs" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="articles-tab" data-bs-toggle="tab" data-bs-target="#articles-content" type="button" role="tab">Articles</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="magazines-tab" data-bs-toggle="tab" data-bs-target="#magazines-content" type="button" role="tab">Magazines</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="newsletter-tab" data-bs-toggle="tab" data-bs-target="#newsletter-content" type="button" role="tab">Newsletter</button>
-      </li>
-    </ul>
-
-    <!-- Tab Content -->
-    <div class="tab-content" id="contentTabsContent">
-      
-     <!-- Articles -->
-<div class="tab-pane fade show active" id="articles-content" role="tabpanel">
-  <div class="row g-4 justify-content-center" id="articles-row">
-    <!-- Spinner -->
-    <div class="text-center w-100 py-5" id="articles-spinner">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Magazines -->
-<div class="tab-pane fade" id="magazines-content" role="tabpanel">
-  <div class="row g-4 justify-content-center" id="magazines-row">
-    <div class="text-center w-100 py-5" id="magazines-spinner">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Newsletter -->
-<div class="tab-pane fade" id="newsletter-content" role="tabpanel">
-  <div class="row g-4 justify-content-center" id="newsletter-row">
-    <div class="text-center w-100 py-5" id="newsletter-spinner">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-</section>
-
-<!-- View All Button -->
-<div class="text-center mt-4">
-  <a href="allarticles.html" id="viewAllBtn" class="btn view-all-btn">View All Articles</a>
-</div>
-
-<!-- Styles -->
-<style>
-  .article-card {
-    border-radius: 12px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width: 400px;
-  }
-  .article-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-  }
-  .badge {
-    font-size: 0.8rem;
-    padding: 0.3rem 0.6rem;
-    border-radius: 10px;
-  }
-  .category-gold {
-    color: #FFD700; /* Gold text */
-    background-color: #fff8dc; /* Light gold background */
-  }
-  .view-all-btn {
-    color: black;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 0.5rem 1.2rem;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  .view-all-btn:hover {
-    color: black;
-    background-color: #fff8dc;
-    border-color: #FFD700;
-    text-decoration: none;
-  }
-  /* Golden Tabs */
-.nav-tabs {
-  border-bottom: 2px solid #FFD700; /* golden underline */
-  justify-content: center; /* ensures center alignment */
-}
-
-.nav-tabs .nav-link {
-  color: #555; /* default text */
-  font-weight: 500;
-  border: none;
-  margin: 0 5px;
-  transition: all 0.3s ease;
-}
-
-.nav-tabs .nav-link.active {
-  color: #000;
-  background-color: #FFD700; /* golden tab */
-  border-radius: 6px 6px 0 0;
-}
-
-.nav-tabs .nav-link:hover {
-  color: #000;
-  background-color: #fff8dc; /* light gold hover */
-  border-radius: 6px 6px 0 0;
-}
-
-</style>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Google Sheets Fetch Script -->
-<script>
-document.addEventListener("DOMContentLoaded", async () => {
-  const sheetUrl = "https://opensheet.elk.sh/1OYagD2zrHeJrYCR2SCgDLYNKs_-vA9bR4UqmgtZnfxw/Sheet1";
-
-  async function fetchSheetData() {
-    try {
-      const res = await fetch(sheetUrl);
-      const data = await res.json();
-      return data;
-    } catch (err) {
-      console.error("Error fetching sheet data:", err);
-      return [];
-    }
-  }
-
-  function createCard(item) {
-    return `
-      <div class="col-md-6 col-lg-4">
-        <div class="card article-card shadow-sm border-0">
-          <div class="card-body py-3 px-3 d-flex flex-column">
-            <div class="d-flex justify-content-between mb-2">
-              <span class="badge category-gold fw-bold">${item.type}</span>
-              <span class="badge bg-light text-secondary">${item.read_time || "5 min read"}</span>
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3" data-aos="zoom-in-up" data-aos-delay="100">
+            <div class="card shadow-sm h-100 border-0 about-card">
+              <div class="card-body text-center py-4">
+                <i class="bi bi-book-half fs-1 mb-3 text-gold"></i>
+                <h5 class="card-title fw-bold">Literary Excellence</h5>
+                <p class="card-text">
+                  Fostering a deep appreciation for literature through critical analysis, creative writing, and scholarly discussions.
+                </p>
+              </div>
             </div>
-            <h5 class="card-title mt-1">${item.title}</h5>
-            <p class="card-text">${item.content}</p>
-            <p class="text-muted mb-2">${item.author} • ${item.date}</p>
-            <a href="${item.read_more_link}" class="btn btn-sm btn-outline-secondary align-self-start" target="_blank">Read More</a>
+          </div>
+
+          <div class="col-md-6 col-lg-3" data-aos="zoom-in-up" data-aos-delay="200">
+            <div class="card shadow-sm h-100 border-0 about-card">
+              <div class="card-body text-center py-4">
+                <i class="bi bi-people-fill fs-1 mb-3 text-gold"></i>
+                <h5 class="card-title fw-bold">Community Building</h5>
+                <p class="card-text">
+                  Creating a vibrant community of writers, readers, and literary enthusiasts who support each other's growth.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3" data-aos="zoom-in-up" data-aos-delay="300">
+            <div class="card shadow-sm h-100 border-0 about-card">
+              <div class="card-body text-center py-4">
+                <i class="bi bi-calendar-event fs-1 mb-3 text-gold"></i>
+                <h5 class="card-title fw-bold">Regular Events</h5>
+                <p class="card-text">
+                  Hosting workshops, poetry readings, author talks, and literary competitions throughout the academic year.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3" data-aos="zoom-in-up" data-aos-delay="400">
+            <div class="card shadow-sm h-100 border-0 about-card">
+              <div class="card-body text-center py-4">
+                <i class="bi bi-award-fill fs-1 mb-3 text-gold"></i>
+                <h5 class="card-title fw-bold">Recognition</h5>
+                <p class="card-text">
+                  Celebrating outstanding literary achievements and providing platforms for emerging writers to showcase their work.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>`;
-  }
+      </div>
+    </section>
 
-  const data = await fetchSheetData();
+    <style>
+      .about-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 12px;
+        min-height: 300px;
+      }
+      .about-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+      .text-gold {
+        color: #FFD700;
+      }
+    </style>
 
-  // Skip adding any cards here; articles, magazines, and newsletters are handled by dedicated scripts below
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-  // Update View All button text dynamically
-  const viewAllBtn = document.getElementById('viewAllBtn');
-  const tabs = document.querySelectorAll('#contentTabs button');
-  tabs.forEach(tab => {
-    tab.addEventListener('shown.bs.tab', (event) => {
-      const tabText = event.target.textContent.trim();
-      viewAllBtn.textContent = `View All ${tabText}`;
-      if(tabText === "Articles") viewAllBtn.href = "allarticles.html"; 
-      else if(tabText === "Magazines") viewAllBtn.href = "allmagazine.html"; 
-      else viewAllBtn.href = "allnewsletter.html";
+    <section id="road_talks" class="py-5 bg-light">
+        <div class="container section-title" data-aos="fade-up">
+            <h2>QUILL College Interactions</h2>
+            <p>
+                QUILL MIT club, being the newsbody of MIT, ensures it interacts with all college students to get to understand what each student feels.
+            </p>
+        </div>
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row g-4 justify-content-center" id="road-talks-row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="skeleton-card">
+                        <div class="skeleton image"></div>
+                        <div class="skeleton title"></div>
+                        <div class="skeleton text"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 d-none d-md-block">
+                    <div class="skeleton-card">
+                        <div class="skeleton image"></div>
+                        <div class="skeleton title"></div>
+                        <div class="skeleton text"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 d-none d-lg-block">
+                    <div class="skeleton-card">
+                        <div class="skeleton image"></div>
+                        <div class="skeleton title"></div>
+                        <div class="skeleton text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .road-talk-card {
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        .road-talk-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        .road-talk-card img {
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            object-fit: cover;
+            height: 300px;
+            width: 100%;
+        }
+        .road-talk-card .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+
+    <script>
+    // Populate the Road Talks section (logic remains the same, just replaces the skeleton)
+    (function() {
+        // ... (The entire JS script for Road Talks remains unchanged)
+        const SHEET_ID = '1i7u3JpUVjHwM0a6ys8RAvv-gf4nBqOAbwK9T-ajgL5s';
+        const SHEET_NAME = 'Sheet1';
+        const GVIZ_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+        function parseGviz(jsonpText) {
+            const start = jsonpText.indexOf('(') + 1;
+            const end = jsonpText.lastIndexOf(')');
+            const json = JSON.parse(jsonpText.substring(start, end));
+            return (json.table.rows || [])
+                .filter(r => r && r.c)
+                .map(r => r.c.map(c => (c && (c.f || c.v)) ? (c.f || c.v) : ''));
+        }
+
+        function createRoadTalkCard(item, index) {
+            const title = item[0] || '';
+            const link = item[2] || '#';
+            const imageUrl = `Road_images/img${index + 1}.png`;
+            const placeholderUrl = 'assets/img/hero-bg.jpg';
+            
+            return `
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="${(index % 3) * 100}">
+                    <div class="card road-talk-card shadow-sm h-100 border-0">
+                        <a href="${link}" target="_blank">
+                            <img src="${imageUrl}" 
+                                class="card-img-top" 
+                                alt="${title}"
+                                onerror="this.onerror=null; this.src='${placeholderUrl}'"
+                                loading="lazy">
+                        </a>
+                        <div class="card-body text-center py-4">
+                        <h3 class="badge bg-light text-secondary mb-2">Road Talk Series</h3>
+                            <h5 class="card-title fw-bold">${title}</h5>
+                            <a href="${link}" class="btn btn-sm btn-outline-primary mt-2" target="_blank">
+                                <i class="bi bi-play-circle me-1"></i>Watch Now
+                            </a>
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        async function renderRoadTalks() {
+            try {
+                const response = await fetch(GVIZ_URL);
+                const text = await response.text();
+                const rows = parseGviz(text);
+                const data = rows.slice(1);
+                const container = document.getElementById('road-talks-row');
+                if (!container) return;
+                
+                const cardsHtml = data.map((row, index) => {
+                    if (row[0] && row[0].trim() !== '') {
+                        return createRoadTalkCard(row, index);
+                    }
+                    return '';
+                }).join('');
+                
+                container.innerHTML = cardsHtml || '<p class="text-center w-100">No talks found.</p>';
+            } catch (err) {
+                console.error('Failed to load road talks:', err);
+                const container = document.getElementById('road-talks-row');
+                if(container) {
+                    container.innerHTML = '<p class="text-center w-100">Could not load talks. Please try again later.</p>';
+                }
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderRoadTalks);
+        } else {
+            renderRoadTalks();
+        }
+    })();
+    </script>
+
+    <section id="articles" class="py-5 bg-subtle">
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Articles and Magazines</h2>
+            <p>
+            Discover thought-provoking essays, creative pieces, and literary analyses from our talented club members.
+            </p>
+        </div>
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <ul class="nav nav-tabs justify-content-center mb-4" id="contentTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="articles-tab" data-bs-toggle="tab" data-bs-target="#articles-content" type="button" role="tab">Articles</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="magazines-tab" data-bs-toggle="tab" data-bs-target="#magazines-content" type="button" role="tab">Magazines</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="newsletter-tab" data-bs-toggle="tab" data-bs-target="#newsletter-content" type="button" role="tab">Newsletter</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="contentTabsContent">
+                <div class="tab-pane fade show active" id="articles-content" role="tabpanel">
+                    <div class="row g-4 justify-content-center" id="articles-row">
+                        <div class="col-md-6 col-lg-4"><div class="skeleton-card"><div class="skeleton title"></div><div class="skeleton text"></div><div class="skeleton text"></div><div class="skeleton text"></div></div></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="magazines-content" role="tabpanel">
+                    <div class="row g-4 justify-content-center" id="magazines-row">
+                        <div class="col-md-6 col-lg-4"><div class="skeleton-card"><div class="skeleton title"></div><div class="skeleton text"></div><div class="skeleton text"></div><div class="skeleton text"></div></div></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="newsletter-content" role="tabpanel">
+                    <div class="row g-4 justify-content-center" id="newsletter-row">
+                        <div class="col-md-6 col-lg-4"><div class="skeleton-card"><div class="skeleton title"></div><div class="skeleton text"></div><div class="skeleton text"></div><div class="skeleton text"></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="text-center mt-4 mb-5">
+        <a href="allarticles.html" id="viewAllBtn" class="btn view-all-btn">View All Articles</a>
+    </div>
+
+    <style>
+    .article-card {
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        max-width: 400px;
+    }
+    .article-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+    .badge {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 10px;
+    }
+    .category-gold {
+        color: #b58c00;
+        background-color: #fff8dc;
+    }
+    .nav-tabs {
+        border-bottom: 2px solid #FFD700;
+        justify-content: center;
+    }
+    .nav-tabs .nav-link {
+        color: #555;
+        font-weight: 500;
+        border: none;
+        margin: 0 5px;
+        transition: all 0.3s ease;
+    }
+    .nav-tabs .nav-link.active {
+        color: #000;
+        background-color: #FFD700;
+        border-radius: 6px 6px 0 0;
+    }
+    .nav-tabs .nav-link:hover {
+        color: #000;
+        background-color: #fff8dc;
+        border-radius: 6px 6px 0 0;
+    }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // This script remains the same, handling the View All button logic
+    document.addEventListener("DOMContentLoaded", () => {
+        const viewAllBtn = document.getElementById('viewAllBtn');
+        const tabs = document.querySelectorAll('#contentTabs button');
+        tabs.forEach(tab => {
+            tab.addEventListener('shown.bs.tab', (event) => {
+            const tabText = event.target.textContent.trim();
+            viewAllBtn.textContent = `View All ${tabText}`;
+            if(tabText === "Articles") viewAllBtn.href = "allarticles.html";
+            else if(tabText === "Magazines") viewAllBtn.href = "allmagazine.html";
+            else viewAllBtn.href = "allnewsletter.html";
+            });
+        });
     });
-  });
-});
-</script>
-
-
+    </script>
     
-<!-- Office Bearers Section -->
-<section id="team" class="team section py-5 bg-light">
-  <div class="container">
-
-    <!-- Section Title -->
-    <div class="section-title text-center mb-5" data-aos="fade-up">
-      <h2>Office Bearers</h2>
-      <p>Meet the dedicated leaders who guide MIT Quill's mission to foster literary excellence and creative community.</p>
-    </div>
-
-    <div class="row g-4 justify-content-center">
-
-      <!-- Bearer 1 -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-        <div class="card bearer-card h-100 shadow-sm border-0 text-center p-3">
-          <h4 class="card-title">Emily Watson</h4>
-          <span class="text-muted d-block mb-2">President • Senior • Literature & Creative Writing</span>
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item badge bg-warning text-dark">Published Author</li>
-            <li class="list-inline-item badge bg-warning text-dark">Poetry Award Winner</li>
-          </ul>
-        </div>
+    <section id="events" class="py-5 bg-light">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Events</h2>
+        <p>
+          MIT Quill organizes engaging literary events that inspire creativity,
+          collaboration, and critical thinking. Our two flagship events are
+          <strong>Initium</strong> and <strong>Renaissance</strong>.
+        </p>
       </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row g-4">
 
-      <!-- Bearer 2 -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-        <div class="card bearer-card h-100 shadow-sm border-0 text-center p-3">
-          <h4 class="card-title">David Chen</h4>
-          <span class="text-muted d-block mb-2">Vice President • Junior • Computer Science & Literature</span>
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item badge bg-warning text-dark">Tech Writer</li>
-            <li class="list-inline-item badge bg-warning text-dark">Digital Humanities</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Bearer 3 -->
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-        <div class="card bearer-card h-100 shadow-sm border-0 text-center p-3">
-          <h4 class="card-title">Sophia Patel</h4>
-          <span class="text-muted d-block mb-2">Secretary • Sophomore • Comparative Literature</span>
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item badge bg-warning text-dark">Translation Work</li>
-            <li class="list-inline-item badge bg-warning text-dark">Cultural Exchange</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Add other members similarly -->
-
-    </div>
-  </div>
-</section>
-
-<style>
-  .bearer-card {
-    border-radius: 12px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .bearer-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-  }
-  .bearer-img {
-    width: 120px; /* compact circular image */
-    height: 120px;
-    object-fit: cover;
-    display: block; /* ensures centering */
-  }
-  .badge.bg-warning {
-    font-size: 0.75rem;
-    padding: 0.3rem 0.6rem;
-    border-radius: 10px;
-  }
-</style>
-
-
-<!-- Events Section -->
-<section id="events" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center mb-4">Our Events</h2>
-    <p class="text-center mb-5">
-      MIT Quill organizes engaging literary events that inspire creativity, 
-      collaboration, and critical thinking. Our two flagship events are 
-      <strong>Initium</strong> and <strong>Renaissance</strong>.
-    </p>
-
-    <div class="row g-4">
-      
-      <!-- Initium Event -->
-      <div class="col-md-6">
-        <div class="card h-100 shadow-sm border-0">
-          <img src="assets/img/events/initium.jpg" class="card-img-top" alt="Initium Event">
-          <div class="card-body">
-            <h4 class="card-title">Initium</h4>
-            <p class="card-text">
-              An inter-college literary fest that marks the beginning of every academic year. 
-              Initium brings together budding writers, poets, and thinkers to showcase 
-              their talent through competitions, workshops, and performances.
-            </p>
+          <div class="col-md-6" data-aos="fade-right" data-aos-delay="200">
+            <div class="card h-100 shadow-sm border-0">
+              <img src="assets/img/events/initium.jpg" class="card-img-top" alt="Initium Event">
+              <div class="card-body">
+                <h4 class="card-title">Initium</h4>
+                <p class="card-text">
+                  An inter-college literary fest that marks the beginning of every academic year.
+                  Initium brings together budding writers, poets, and thinkers to showcase
+                  their talent through competitions, workshops, and performances.
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Renaissance Event -->
-      <div class="col-md-6">
-        <div class="card h-100 shadow-sm border-0">
-          <img src="assets/img/events/renaissance.jpg" class="card-img-top" alt="Renaissance Event">
-          <div class="card-body">
-            <h4 class="card-title">Renaissance</h4>
-            <p class="card-text">
-              A celebration of literature and cultural revival. Renaissance features 
-              thought-provoking debates, creative writing contests, and guest lectures 
-              from distinguished authors, fostering a spirit of intellectual renewal.
-            </p>
+          <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+            <div class="card h-100 shadow-sm border-0">
+              <img src="assets/img/events/renaissance.jpg" class="card-img-top" alt="Renaissance Event">
+              <div class="card-body">
+                <h4 class="card-title">Renaissance</h4>
+                <p class="card-text">
+                  A celebration of literature and cultural revival. Renaissance features
+                  thought-provoking debates, creative writing contests, and guest lectures
+                  from distinguished authors, fostering a spirit of intellectual renewal.
+                </p>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
+    </section>
+    
+    <section id="archive" class="testimonials section bg-subtle">
 
-    </div>
-  </div>
-</section>
-
-
-<!-- Testimonials Section -->
-<section id="archive" class="testimonials section">
-
-  <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
     <h2>Archives</h2>
     <p>
-      A collection of memorable quotes and reflections shared by our past members, 
+      A collection of memorable quotes and reflections shared by our past members,
       capturing their experiences and journey with the Quill Club.
     </p>
-  </div><!-- End Section Title -->
-
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
+  </div><div class="container" data-aos="fade-up" data-aos-delay="100">
 
     <div class="swiper init-swiper">
       <script type="application/json" class="swiper-config">
@@ -531,7 +564,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       </script>
       <div class="swiper-wrapper">
 
-        <!-- Quote 1 -->
         <div class="swiper-slide">
           <div class="testimonial-item">
             <div class="row gy-4 justify-content-center">
@@ -550,10 +582,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               </div>
             </div>
           </div>
-        </div><!-- End testimonial item -->
-
-        <!-- Quote 2 -->
-        <div class="swiper-slide">
+        </div><div class="swiper-slide">
           <div class="testimonial-item">
             <div class="row gy-4 justify-content-center">
               <div class="col-lg-6">
@@ -571,10 +600,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               </div>
             </div>
           </div>
-        </div><!-- End testimonial item -->
-
-        <!-- Quote 3 -->
-        <div class="swiper-slide">
+        </div><div class="swiper-slide">
           <div class="testimonial-item">
             <div class="row gy-4 justify-content-center">
               <div class="col-lg-6">
@@ -592,10 +618,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               </div>
             </div>
           </div>
-        </div><!-- End testimonial item -->
-
-        <!-- Quote 4 -->
-        <div class="swiper-slide">
+        </div><div class="swiper-slide">
           <div class="testimonial-item">
             <div class="row gy-4 justify-content-center">
               <div class="col-lg-6">
@@ -613,27 +636,19 @@ document.addEventListener("DOMContentLoaded", async () => {
               </div>
             </div>
           </div>
-        </div><!-- End testimonial item -->
-
-      </div>
+        </div></div>
       <div class="swiper-pagination"></div>
     </div>
 
   </div>
 
-</section><!-- /Testimonials Section -->
-
-
-
-
-    
-  </main>
+</section></main>
 
 <footer id="footer" class="footer dark-background">
 
   <div class="container text-center">
     <div class="row gy-3 justify-content-center">
-      
+
       <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center">
         <i class="bi bi-geo-alt icon mb-2"></i>
         <div class="address">
@@ -672,13 +687,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 </footer>
 
 
-  <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Preloader -->
   <div id="preloader"></div>
 
-  <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
@@ -688,9 +700,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-  <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
   <script>
+    // All Google Sheets fetching scripts remain here, unchanged in their logic.
   // Populate the Magazines tab with a single card from Google Sheets (bottom-most row)
   (function() {
     const SHEET_ID = '16b2aV3G4dimm7ENkD6KlJklPt2bXrc9LL7lt682Jv2c';
@@ -719,7 +731,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     function createMagazineCard(item) {
-      // Columns: 0=Heading, 1=Description, 3=Author, 4=Date
       const title = item[0] || '';
       const description = item[1] || '';
       const author = item[3] || 'MIT Quill Team';
@@ -756,7 +767,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           const link = document.getElementById('latestMagLink');
           if (link) link.href = `${item[5]}`;
         })
-        .catch(err => console.error('Failed to load magazine card for homepage', err));
+        .catch(err => {
+            console.error('Failed to load magazine card for homepage', err);
+            const container = document.getElementById('magazines-row');
+            if(container) container.innerHTML = '<p class="text-danger text-center">Could not load magazines.</p>';
+        });
     }
 
     if (document.readyState === 'loading') {
@@ -825,7 +840,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (!container) return;
           container.innerHTML = createArticleCard(latest, latestIndex);
         })
-        .catch(err => console.error('Failed to load article card for homepage', err));
+        .catch(err => {
+            console.error('Failed to load article card for homepage', err);
+            const container = document.getElementById('articles-row');
+            if(container) container.innerHTML = '<p class="text-danger text-center">Could not load articles.</p>';
+        });
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderLatest); else renderLatest();
@@ -871,13 +890,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         const container = document.getElementById('newsletter-row');
         if(!container) return;
         container.innerHTML = createNewsletterCard(latest, latestIndex);
-      }).catch(err=>console.error('Failed to load newsletter card for homepage', err));
+      }).catch(err=> {
+        console.error('Failed to load newsletter card for homepage', err);
+        const container = document.getElementById('newsletter-row');
+        if(container) container.innerHTML = '<p class="text-danger text-center">Could not load newsletters.</p>';
+      });
     }
 
     if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', renderLatest); else renderLatest();
   })();
   </script>
-
 </body>
-
 </html>
